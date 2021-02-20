@@ -1,8 +1,5 @@
-from itertools import permutations
+from itertools import permutations, product
 import sys, os
-"""
-Permutations with repetitions.
-"""
 
 def welcome():
 	os.system('clear')
@@ -16,7 +13,7 @@ def welcome():
 	|_|   \__,_|___/___/_|\__,_|_|  \__, |\___|\__|
 	                                 __/ |         
 	                                |___/ 
-	Version 0.2         
+	Version 0.3         
 	"""
 		)
 	print("How to use:\n")
@@ -28,24 +25,38 @@ def get_word():
 	word = input("Enter the known password fragments: ")
 	return word
 
+def get_number_Repetition():
+	repeats = int(input("Enter the number of repetitions: "))
+	print()
+	return repeats
+
 def get_number_of_permutations(n,r):
 	""" 
 	n : The number of possible characters
 	r : The number of postions 
 	"""
-	return (n ** r)
+	if r > 1:
+		return (n ** r) - n
+	else:
+		return (n ** r)
 
-def save_output(filename, wordlist):
+def save_output(filename, wordlist, num_iterations):
+	wordlist_length = num_iterations
+	_loadbar(0, wordlist_length)
 	with open(filename + ".txt", "w") as file:
-		for line in wordlist:
+		for i, line in enumerate(wordlist):
 			file.write(line + "\n")
+			_loadbar(i + 1, wordlist_length)
 
-def all_chars():
+def all_chars(repeats):
 	numbers = [chr(i) for i in range(48,57 + 1) ]
 	up_letters = [chr(i) for i in range(65,90 + 1)]
 	low_letters = [chr(i) for i in range(97,122 + 1)]
 	all_char = numbers + up_letters + low_letters
-	return all_char
+
+	for _ in range(repeats):
+		all_char = all_char + all_char
+	return all_char 
 
 def getTargets(word):
 	targets = []
@@ -60,10 +71,12 @@ def create_combinations(list_of_char,length_of_set, total_iterations):
 	_loadbar(0, total_iterations)
 	perm = permutations(list_of_char, length_of_set)
 	combinations = []
+	count = 0
 	for i, idx in enumerate(perm):
 		combinations.append(idx)
+		count += 1
 		_loadbar(i + 1, total_iterations)
-
+	
 	return combinations
 
 def create_wordlist(word, combinations, points):
@@ -77,40 +90,46 @@ def create_wordlist(word, combinations, points):
 
 	return wordlist
 
-def check_length(length, num_iterations):
+def check_entry(length, num_iterations, repeats):
 	if length > 3:
 		print('**************************************************************')
 		print('This may take some time as permutations set it greater than 3.')
 		print(f'The total number of iteration would be {str(num_iterations)} \n')
 		user_request = input('Do you want to continue, y/n: ')
 		if user_request == 'n':
-			sys.exit()
+			return False
+		if repeats > length:
+			print('Repetition can not be greater than questionables unknowns!')
+			return False
 
 def _loadbar(iteration, total, prefix='Progress', suffix='Complete', decimals=1, length=30, fill='#'):
-	percent = ('{0:.'+ str(decimals) + 'f}').format(100 * (iteration/float(total)))
+	percent = ('{0:.' + str(decimals) + 'f}').format(100 * (iteration/float(total)))
 	filledlength = int(length * iteration // total)
 	bar = fill * filledlength + '-' * (length - filledlength)
-	print(f'\r{prefix} | {bar} | {percent}% {suffix}', end='\r')
-	if iteration == total:
-		print()
+	print(f'\r{prefix}|{bar}|{percent}% {suffix}', end='\r')
+	
 
 def main():
 	welcome()
 	word = get_word()
-	all_char = all_chars()
+	repeats = get_number_Repetition()
+	all_char = all_chars(repeats)
 	points, length = getTargets(word)
 	num_iterations = get_number_of_permutations(len(all_char), length)
-	check_length(length, num_iterations)
+
+	result = check_entry(length, num_iterations, repeats)
+	if result == False:
+		sys.ext()
+
 	combinations = create_combinations(all_char, length, num_iterations)
 	wordlist = create_wordlist(word, combinations, points)
-	save_output("wordlist", wordlist)
+	
+	save_output("wordlist", wordlist, num_iterations)
 
 	print("\n\n**** Completed ****\n")
 
 if __name__ == "__main__":
 	main()
-
-
 
 
 
