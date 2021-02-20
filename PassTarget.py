@@ -1,5 +1,8 @@
 from itertools import permutations, product
 import sys, os
+"""
+Cartesian product.
+"""
 
 def welcome():
 	os.system('clear')
@@ -40,13 +43,13 @@ def get_number_of_permutations(n,r):
 	else:
 		return (n ** r)
 
-def save_output(filename, wordlist, num_iterations):
-	wordlist_length = num_iterations
+def save_output(filename, wordlist):
+	wordlist_length = len(wordlist)
 	_loadbar(0, wordlist_length)
 	with open(filename + ".txt", "w") as file:
 		for i, line in enumerate(wordlist):
 			file.write(line + "\n")
-			_loadbar(i + 1, wordlist_length)
+			_loadbar(i+1, wordlist_length)
 
 def all_chars(repeats):
 	numbers = [chr(i) for i in range(48,57 + 1) ]
@@ -124,12 +127,14 @@ def main():
 	combinations = create_combinations(all_char, length, num_iterations)
 	wordlist = create_wordlist(word, combinations, points)
 	
-	save_output("wordlist", wordlist, num_iterations)
+	save_output("wordlist", wordlist)
 
 	print("\n\n**** Completed ****\n")
 
 if __name__ == "__main__":
 	main()
+
+
 
 
 
