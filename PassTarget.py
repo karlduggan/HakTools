@@ -16,7 +16,7 @@ def welcome():
 	|_|   \__,_|___/___/_|\__,_|_|  \__, |\___|\__|
 	                                 __/ |         
 	                                |___/ 
-	Version 0.3         
+	Version 0.5         
 	"""
 		)
 	print("How to use:\n")
@@ -101,9 +101,9 @@ def check_entry(length, num_iterations, repeats):
 		user_request = input('Do you want to continue, y/n: ')
 		if user_request == 'n':
 			return False
-		if repeats > length:
-			print('Repetition can not be greater than questionables unknowns!')
-			return False
+	if repeats > length:
+		print('Repetition can not be greater than questionables unknowns!')
+		return False
 
 def _loadbar(iteration, total, prefix='Progress', suffix='Complete', decimals=1, length=30, fill='#'):
 	percent = ('{0:.' + str(decimals) + 'f}').format(100 * (iteration/float(total)))
@@ -122,7 +122,7 @@ def main():
 
 	result = check_entry(length, num_iterations, repeats)
 	if result == False:
-		sys.ext()
+		sys.exit()
 
 	combinations = create_combinations(all_char, length, num_iterations)
 	wordlist = create_wordlist(word, combinations, points)
@@ -133,8 +133,6 @@ def main():
 
 if __name__ == "__main__":
 	main()
-
-
 
 
 
