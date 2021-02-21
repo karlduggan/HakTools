@@ -1,8 +1,6 @@
 from itertools import permutations, product
 import sys, os
-"""
-Cartesian product.
-"""
+
 
 def welcome():
 	os.system('clear')
