@@ -4,3 +4,6 @@ Creating tools for CTFs and pentesting studies. There are great tools out there 
 
 ## PassTarget.py
 - A simple wordlist generator that takes the know parts of a password and produces all possible options, the resulted posibilities is stored in a wordlist.txt which can then be used to bruteforce your way in.
+
+## DirFinder.py
+- ?
