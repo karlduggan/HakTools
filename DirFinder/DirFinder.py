@@ -68,7 +68,7 @@ def _loadbar(iteration, total, prefix='Progress', suffix='Complete', decimals=1,
 def main():
 	url = 'www.karlduggan.com'
 	# temp example with a list
-	dirList = get_directory_list("directory-list-1.0.txt")
+	dirList = get_directory_list("directory-list.txt")
 
 	find_directories2(url, dirList[:30], 3)
 
