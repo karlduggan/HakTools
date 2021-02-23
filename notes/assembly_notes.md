@@ -20,8 +20,8 @@ registers are small storage area in the processors, they can be used to store me
 
 ## The Stack
 the stack is a data structure comprised of elements which can be added or removed with only two operations, "push" or "pop"
->>> Push adds an element to the top of the stack
->>> Pop removes the top element from stack
+- Push adds an element to the top of the stack
+- Pop removes the top element from stack
 each element on the stack is assigned a stack address.
 elements that are higher on the stack have lower address than those at the bottom of the stack. 
 The stack grows towards lower address memory 
