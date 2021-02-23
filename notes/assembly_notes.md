@@ -24,4 +24,27 @@ the stack is a data structure comprised of elements which can be added or remove
 - Pop removes the top element from stack
 each element on the stack is assigned a stack address.
 elements that are higher on the stack have lower address than those at the bottom of the stack. 
-The stack grows towards lower address memory 
+The stack grows towards lower address memory
+
+## Instructions
+The instruction has two parts.
+* Operations
+* Arguments 
+Every operations can take two arguments which is seperated with a comma.
+The move operations takes arg2 and moves it to arg1
+[ mov arg1, arg2 ]
+
+The add opeerations takes the two arguments and stores it in the first arg1.
+[ add arg1, arg2 ]
+
+The sub operations acts in the same way but this time arg2 is subtracted from arg1.
+[ sub arg1, arg2 ]
+
+The compared
+[ cmp arg1, arg2 ]
+
+Push
+
+Pop
+
+Lea
