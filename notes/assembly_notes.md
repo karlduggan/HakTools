@@ -1,10 +1,10 @@
 #
 
 Every C programs has 4 components.
-1- Heap
-2- Stack
-3- Registers
-4- Instructions
+* Heap
+* Stack
+* Registers
+* Instructions
 
 There are two main archecture which dictates how a program is run and executed.
 1- 32-bit
